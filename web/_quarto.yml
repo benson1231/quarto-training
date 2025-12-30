@@ -17,6 +17,15 @@ website:
             text: R Example
           - href: examples/quarto.qmd
             text: Quarto Example
+    tools:
+      - icon: book
+        href: https://benson1231.gitbook.io/benson1231-docs
+      - icon: github
+        menu:
+          - text: Source Code
+            href:  https://github.com/benson1231/quarto-training
+          - text: Report a Bug
+            href:  https://github.com/benson1231/quarto-training/issues
 
 format:
   html:
