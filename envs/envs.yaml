@@ -1,0 +1,25 @@
+name: quarto-training
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  # quarto
+  - conda-forge::quarto=1.8.26
+  # r
+  - conda-forge::r-base=4.5.2
+  - conda-forge::r-knitr=1.51
+  - conda-forge::r-rmarkdown=2.30
+  - conda-forge::r-reticulate=1.44.1
+  # python
+  - conda-forge::python=3.14.2
+  - conda-forge::jupyter=1.1.1
+  - conda-forge::pyyaml=6.0.3
+  # demo-python-libraries
+  - conda-forge::numpy=2.4.0
+  - conda-forge::pandas=2.3.3
+  - conda-forge::matplotlib=3.10.8
+  - conda-forge::plotly=6.5.0
+  # demo-r-libraries
+  - conda-forge::r-tidyverse=2.0.0
+
+

@@ -1,0 +1,30 @@
+project:
+  type: website
+
+website:
+  title: "web"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Examples
+        menu:
+          - href: examples/quarto-bash.qmd
+            text: Bash Example
+          - href: examples/quarto-python.qmd
+            text: Python Example
+          - href: examples/quarto-r.qmd
+            text: R Example
+          - href: examples/quarto.qmd
+            text: Quarto Example
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+
+
+
