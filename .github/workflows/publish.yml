@@ -3,42 +3,47 @@ on:
   push:
     branches: main
 
-name: Quarto Publish
+name: Build and Deploy Quarto Website
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
-
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
 
     steps:
-      # 1. Checkout repo
-      - name: Check out repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2. Setup Quarto
-      - name: Set up Quarto
+      - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # 3. Setup Micromamba + create conda env from envs/envs.yaml
-      - name: Set up micromamba
+      - name: Setup micromamba
         uses: mamba-org/setup-micromamba@v2
         with:
           environment-file: envs/envs.yaml
           environment-name: quarto-training
           cache-environment: true
 
-      # 4. Render Quarto website (using the conda environment)
       - name: Render Quarto site
-        run: |
-          micromamba run -n quarto-training quarto render ./web
+        run: >
+          micromamba run -n quarto-training
+          quarto render web/
 
-      # 5. Publish to GitHub Pages
-      - name: Publish to GitHub Pages
-        uses: quarto-dev/quarto-actions/publish@v2
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: web/_site
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
